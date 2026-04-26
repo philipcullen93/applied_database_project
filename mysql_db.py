@@ -36,3 +36,29 @@ def search_speakers_sessions(search_text):
 
     conn.close()
     return results
+
+def get_attendees_by_company(company_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    query = """
+        SELECT
+            company.companyName,
+            attendee.attendeeName,
+            attendee.attendeeDOB,
+            session.sessionTitle,
+            session.speakerName,
+            room.roomName
+        FROM company
+        JOIN attendee ON company.companyID = attendee.attendeeCompanyID
+        JOIN registration ON attendee.attendeeID = registration.attendeeID
+        JOIN session ON registration.sessionID = session.sessionID
+        JOIN room ON session.roomID = room.roomID
+        WHERE company.companyID = %s;
+    """
+
+    cursor.execute(query, (company_id,))
+    results = cursor.fetchall()
+
+    conn.close()
+    return results
