@@ -2,8 +2,24 @@ from mysql_db import test_mysql_connection
 from neo4j_db import test_neo4j_connection
 
 
+from mysql_db import test_mysql_connection, search_speakers_sessions
+
 def view_speakers_sessions():
-    print("\nView Speakers & Sessions selected")
+    search_text = input("\nEnter speaker name or part of name: ")
+
+    results = search_speakers_sessions(search_text)
+
+    if len(results) == 0:
+        print("\nNo speakers found.")
+    else:
+        print("\nSpeakers & Sessions")
+        print("-" * 50)
+
+        for speaker_name, session_title, room_name in results:
+            print(f"Speaker: {speaker_name}")
+            print(f"Session: {session_title}")
+            print(f"Room: {room_name}")
+            print("-" * 50)
 
 
 def view_attendees_by_company():
