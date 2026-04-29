@@ -37,6 +37,22 @@ def search_speakers_sessions(search_text):
     conn.close()
     return results
 
+def get_company_name(company_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    query = """
+        SELECT companyName
+        FROM company
+        WHERE companyID = %s;
+    """
+
+    cursor.execute(query, (company_id,))
+    result = cursor.fetchone()
+
+    conn.close()
+    return result
+
 def get_attendees_by_company(company_id):
     conn = get_connection()
     cursor = conn.cursor()

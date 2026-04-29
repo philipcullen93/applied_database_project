@@ -1,7 +1,7 @@
 from mysql_db import test_mysql_connection
 from neo4j_db import test_neo4j_connection
 
-from mysql_db import test_mysql_connection, search_speakers_sessions, get_attendees_by_company
+from mysql_db import test_mysql_connection, search_speakers_sessions, get_attendees_by_company, get_company_name
 
 def view_speakers_sessions():
     search_text = input("\nEnter speaker name or part of name: ")
@@ -31,15 +31,21 @@ def view_attendees_by_company():
             print("Invalid input. Please enter a numeric company ID.")
             continue
 
+        company = get_company_name(company_id)
+
+        if company is None:
+            print("Company ID does not exist. Please try again.")
+            continue
+
         results = get_attendees_by_company(company_id)
 
         if len(results) == 0:
-            print("No data found for that company ID. Try again.")
+            print("Company exists, but has no attendees registered for any sessions. Please try again.")
             continue
 
         break
 
-    company_name = results[0][0]
+    company_name = company[0]
 
     print(f"\nCompany: {company_name}")
     print("-" * 60)
@@ -51,7 +57,6 @@ def view_attendees_by_company():
         print(f"Speaker: {speaker_name}")
         print(f"Room: {room_name}")
         print("-" * 60)
-
 
 def add_new_attendee():
     print("\nAdd New Attendee selected")
