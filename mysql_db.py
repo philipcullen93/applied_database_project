@@ -78,3 +78,34 @@ def get_attendees_by_company(company_id):
 
     conn.close()
     return results
+
+def attendee_exists(attendee_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    query = """
+        SELECT attendeeID
+        FROM attendee
+        WHERE attendeeID = %s;
+    """
+
+    cursor.execute(query, (attendee_id,))
+    result = cursor.fetchone()
+
+    conn.close()
+    return result is not None
+
+def add_attendee(attendee_id, name, dob, gender, company_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    query = """
+        INSERT INTO attendee
+        (attendeeID, attendeeName, attendeeDOB, attendeeGender, attendeeCompanyID)
+        VALUES (%s, %s, %s, %s, %s);
+    """
+
+    cursor.execute(query, (attendee_id, name, dob, gender, company_id))
+    conn.commit()
+
+    conn.close()

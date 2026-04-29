@@ -1,7 +1,14 @@
 from mysql_db import test_mysql_connection
 from neo4j_db import test_neo4j_connection
 
-from mysql_db import test_mysql_connection, search_speakers_sessions, get_attendees_by_company, get_company_name
+from mysql_db import (
+    test_mysql_connection,
+    search_speakers_sessions,
+    get_attendees_by_company,
+    get_company_name,
+    attendee_exists,
+    add_attendee
+)
 
 def view_speakers_sessions():
     search_text = input("\nEnter speaker name or part of name: ")
@@ -59,8 +66,33 @@ def view_attendees_by_company():
         print("-" * 60)
 
 def add_new_attendee():
-    print("\nAdd New Attendee selected")
+    print("\nAdd New Attendee")
 
+    attendee_id = input("Enter attendee ID: ")
+    name = input("Enter attendee name: ")
+    dob = input("Enter date of birth YYYY-MM-DD: ")
+    gender = input("Enter gender Male/Female: ")
+    company_id = input("Enter attendee company ID: ")
+
+    if attendee_exists(attendee_id):
+        print(f"***ERROR*** Attendee ID: {attendee_id} already exists")
+        return
+
+    if gender not in ["Male", "Female"]:
+        print("***ERROR*** Gender must be Male/Female")
+        return
+
+    company = get_company_name(company_id)
+
+    if company is None:
+        print(f"***ERROR*** Company ID: {company_id} does not exist")
+        return
+
+    try:
+        add_attendee(attendee_id, name, dob, gender, company_id)
+        print("Attendee successfully added")
+    except Exception as e:
+        print(f"***ERROR*** {e}")
 
 def view_connected_attendees():
     print("\nView Connected Attendees selected")
