@@ -96,7 +96,10 @@ def add_new_attendee():
 
 def view_connected_attendees():
     while True:
-        attendee_id = input("\nEnter Attendee ID: ")
+        attendee_id = input("\nEnter Attendee ID or 'x' to return to menu: ")
+
+        if attendee_id.lower() == "x":
+            return
 
         if not attendee_id.isdigit():
             print("***ERROR*** Invalid Attendee ID")
