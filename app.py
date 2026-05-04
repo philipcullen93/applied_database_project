@@ -132,8 +132,27 @@ def view_connected_attendees():
             print(f"{connected_id} | {connected_name[0]}")
 
 def add_attendee_connection():
-    print("\nAdd Attendee Connection selected")
+    print("\nAdd Attendee Connection")
 
+    attendee_id_1 = input("Attendee ID 1: ")
+    attendee_id_2 = input("Attendee ID 2: ")
+
+    if not attendee_id_1.isdigit() or not attendee_id_2.isdigit():
+        print("***ERROR*** Invalid Attendee ID")
+        return
+
+    attendee_1 = get_attendee_name(attendee_id_1)
+    attendee_2 = get_attendee_name(attendee_id_2)
+
+    if attendee_1 is None:
+        print(f"***ERROR*** Attendee ID: {attendee_id_1} does not exist")
+        return
+
+    if attendee_2 is None:
+        print(f"***ERROR*** Attendee ID: {attendee_id_2} does not exist")
+        return
+
+    print(f"Attendee {attendee_id_1} and Attendee {attendee_id_2} are valid")
 
 def view_rooms():
     print("\nView Rooms selected")
