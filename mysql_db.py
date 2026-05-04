@@ -109,3 +109,19 @@ def add_attendee(attendee_id, name, dob, gender, company_id):
     conn.commit()
 
     conn.close()
+
+def get_attendee_name(attendee_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    query = """
+        SELECT attendeeName
+        FROM attendee
+        WHERE attendeeID = %s;
+    """
+
+    cursor.execute(query, (attendee_id,))
+    result = cursor.fetchone()
+
+    conn.close()
+    return result

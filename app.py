@@ -1,5 +1,4 @@
-from mysql_db import test_mysql_connection
-from neo4j_db import test_neo4j_connection
+from neo4j_db import test_neo4j_connection, get_connected_attendees
 
 from mysql_db import (
     test_mysql_connection,
@@ -7,7 +6,8 @@ from mysql_db import (
     get_attendees_by_company,
     get_company_name,
     attendee_exists,
-    add_attendee
+    add_attendee,
+    get_attendee_name
 )
 
 def view_speakers_sessions():
@@ -95,8 +95,38 @@ def add_new_attendee():
         print(f"***ERROR*** {e}")
 
 def view_connected_attendees():
-    print("\nView Connected Attendees selected")
+    while True:
+        attendee_id = input("\nEnter Attendee ID: ")
 
+        if not attendee_id.isdigit():
+            print("***ERROR*** Invalid Attendee ID")
+            continue
+
+        attendee = get_attendee_name(attendee_id)
+
+        if attendee is None:
+            print("***ERROR*** Attendee does not exist")
+            continue
+
+        break
+
+    attendee_name = attendee[0]
+
+    print(f"Attendee Name: {attendee_name}")
+
+    connected_ids = get_connected_attendees(attendee_id)
+
+    if len(connected_ids) == 0:
+        print("\nNo connections")
+        return
+
+    print("\nThese Attendees are connected:")
+
+    for connected_id in connected_ids:
+        connected_name = get_attendee_name(connected_id)
+
+        if connected_name is not None:
+            print(f"{connected_id} | {connected_name[0]}")
 
 def add_attendee_connection():
     print("\nAdd Attendee Connection selected")
