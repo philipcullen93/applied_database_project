@@ -1,4 +1,4 @@
-from neo4j_db import test_neo4j_connection, get_connected_attendees
+from neo4j_db import test_neo4j_connection, get_connected_attendees, add_connection
 
 from mysql_db import (
     test_mysql_connection,
@@ -152,7 +152,10 @@ def add_attendee_connection():
         print(f"***ERROR*** Attendee ID: {attendee_id_2} does not exist")
         return
 
-    print(f"Attendee {attendee_id_1} and Attendee {attendee_id_2} are valid")
+    # Create connection in Neo4j
+    add_connection(attendee_id_1, attendee_id_2)
+
+    print(f"Attendee {attendee_id_1} is now connected to Attendee {attendee_id_2}")
 
 def view_rooms():
     print("\nView Rooms selected")

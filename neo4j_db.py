@@ -31,3 +31,17 @@ def get_connected_attendees(attendee_id):
 
     driver.close()
     return connections
+
+def add_connection(attendee_id_1, attendee_id_2):
+    driver = get_driver()
+
+    query = """
+        MERGE (a:Attendee {AttendeeID: $id1})
+        MERGE (b:Attendee {AttendeeID: $id2})
+        MERGE (a)-[:CONNECTED_TO]-(b);
+    """
+
+    with driver.session() as session:
+        session.run(query, id1=int(attendee_id_1), id2=int(attendee_id_2))
+
+    driver.close()
