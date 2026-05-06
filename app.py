@@ -134,28 +134,33 @@ def view_connected_attendees():
 def add_attendee_connection():
     print("\nAdd Attendee Connection")
 
-    attendee_id_1 = input("Attendee ID 1: ")
-    attendee_id_2 = input("Attendee ID 2: ")
+    while True:
+        attendee_id_1 = input("Attendee ID 1: ")
+        attendee_id_2 = input("Attendee ID 2: ")
 
-    if not attendee_id_1.isdigit() or not attendee_id_2.isdigit():
-        print("***ERROR*** Invalid Attendee ID")
-        return
+        if not attendee_id_1.isdigit() or not attendee_id_2.isdigit():
+            print("***ERROR*** Invalid Attendee ID")
+            continue
 
-    attendee_1 = get_attendee_name(attendee_id_1)
-    attendee_2 = get_attendee_name(attendee_id_2)
+        if attendee_id_1 == attendee_id_2:
+            print("***ERROR*** An Attendee cannot connect to him/herself")
+            continue
 
-    if attendee_1 is None:
-        print(f"***ERROR*** Attendee ID: {attendee_id_1} does not exist")
-        return
+        attendee_1 = get_attendee_name(attendee_id_1)
+        attendee_2 = get_attendee_name(attendee_id_2)
 
-    if attendee_2 is None:
-        print(f"***ERROR*** Attendee ID: {attendee_id_2} does not exist")
-        return
+        if attendee_1 is None:
+            print(f"***ERROR*** Attendee ID: {attendee_id_1} does not exist")
+            continue
 
-    # Create connection in Neo4j
-    add_connection(attendee_id_1, attendee_id_2)
+        if attendee_2 is None:
+            print(f"***ERROR*** Attendee ID: {attendee_id_2} does not exist")
+            continue
 
-    print(f"Attendee {attendee_id_1} is now connected to Attendee {attendee_id_2}")
+        add_connection(attendee_id_1, attendee_id_2)
+
+        print(f"Attendee {attendee_id_1} is now connected to Attendee {attendee_id_2}")
+        break
 
 def view_rooms():
     print("\nView Rooms selected")
