@@ -32,6 +32,27 @@ def get_connected_attendees(attendee_id):
     driver.close()
     return connections
 
+def connection_exists(attendee_id_1, attendee_id_2):
+    driver = get_driver()
+
+    query = """
+        MATCH (a:Attendee {AttendeeID: $id1})-[:CONNECTED_TO]-(b:Attendee {AttendeeID: $id2})
+        RETURN COUNT(*) AS connectionCount
+    """
+
+    with driver.session() as session:
+        result = session.run(
+            query,
+            id1=int(attendee_id_1),
+            id2=int(attendee_id_2)
+        )
+
+        count = result.single()["connectionCount"]
+
+    driver.close()
+
+    return count > 0
+
 def add_connection(attendee_id_1, attendee_id_2):
     driver = get_driver()
 

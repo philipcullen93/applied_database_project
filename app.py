@@ -1,4 +1,9 @@
-from neo4j_db import test_neo4j_connection, get_connected_attendees, add_connection
+from neo4j_db import (
+    test_neo4j_connection,
+    get_connected_attendees,
+    add_connection,
+    connection_exists
+)
 
 from mysql_db import (
     test_mysql_connection,
@@ -135,11 +140,18 @@ def add_attendee_connection():
     print("\nAdd Attendee Connection")
 
     while True:
-        attendee_id_1 = input("Attendee ID 1: ")
-        attendee_id_2 = input("Attendee ID 2: ")
+        attendee_id_1 = input("Attendee ID 1 or 'x' to return to menu: ")
+        
+        if attendee_id_1.lower() == "x":
+            return
+
+        attendee_id_2 = input("Attendee ID 2 or 'x' to return to menu: ")
+
+        if attendee_id_2.lower() == "x":
+            return
 
         if not attendee_id_1.isdigit() or not attendee_id_2.isdigit():
-            print("***ERROR*** Invalid Attendee ID")
+            print("***ERROR*** Both Attendee IDs must be numbers.")
             continue
 
         if attendee_id_1 == attendee_id_2:
@@ -149,12 +161,12 @@ def add_attendee_connection():
         attendee_1 = get_attendee_name(attendee_id_1)
         attendee_2 = get_attendee_name(attendee_id_2)
 
-        if attendee_1 is None:
-            print(f"***ERROR*** Attendee ID: {attendee_id_1} does not exist")
+        if attendee_1 is None or attendee_2 is None:
+            print("***ERROR*** One or both attendee IDs do not exist.")
             continue
 
-        if attendee_2 is None:
-            print(f"***ERROR*** Attendee ID: {attendee_id_2} does not exist")
+        if connection_exists(attendee_id_1, attendee_id_2):
+            print("***ERROR*** These attendees are already connected.")
             continue
 
         add_connection(attendee_id_1, attendee_id_2)
