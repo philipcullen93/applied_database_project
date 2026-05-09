@@ -125,3 +125,19 @@ def get_attendee_name(attendee_id):
 
     conn.close()
     return result
+
+def get_rooms():
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    query = """
+        SELECT roomID, roomName, capacity
+        FROM room
+        ORDER BY roomID;
+    """
+
+    cursor.execute(query)
+    results = cursor.fetchall()
+
+    conn.close()
+    return results

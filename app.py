@@ -12,8 +12,11 @@ from mysql_db import (
     get_company_name,
     attendee_exists,
     add_attendee,
-    get_attendee_name
+    get_attendee_name,
+    get_rooms
 )
+
+cached_rooms = None
 
 def view_speakers_sessions():
     search_text = input("\nEnter speaker name or part of name: ")
@@ -175,7 +178,15 @@ def add_attendee_connection():
         break
 
 def view_rooms():
-    print("\nView Rooms selected")
+    global cached_rooms
+
+    if cached_rooms is None:
+        cached_rooms = get_rooms()
+
+    print("\nRoom ID | Room Name | Capacity")
+
+    for room_id, room_name, capacity in cached_rooms:
+        print(f"{room_id} | {room_name} | {capacity}")
 
 
 def main_menu():
