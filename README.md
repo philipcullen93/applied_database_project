@@ -97,3 +97,80 @@ This combines several pieces of data:
 1. MySQL session registration data
 2. Neo4j relationship data
 3. Python filtering logic
+
+# References
+
+## General Python / Database References
+
+- Python Official Documentation  
+  https://docs.python.org/3/
+
+- MySQL Connector/Python Documentation  
+  https://dev.mysql.com/doc/connector-python/en/
+
+- Neo4j Python Driver Documentation  
+  https://neo4j.com/docs/python-manual/current/
+
+## Menu Option 1 - View Speakers & Sessions
+
+Used SQL JOIN queries to retrieve related data from multiple tables.
+
+References:
+- https://www.w3schools.com/sql/sql_join.asp
+- https://dev.mysql.com/doc/refman/8.0/en/join.html
+
+## Menu Option 2 - View Attendees by Company
+
+Used INNER JOIN queries across attendee, company, registration, session, and room tables.
+
+References:
+- https://www.w3schools.com/sql/sql_join_inner.asp
+- https://realpython.com/python-mysql/
+
+## Menu Option 3 - Add New Attendee
+
+Used SQL INSERT statements and Python exception handling.
+
+References:
+- https://www.w3schools.com/sql/sql_insert.asp
+- https://docs.python.org/3/tutorial/errors.html
+
+## Menu Option 4 - View Connected Attendees
+
+Used Neo4j Cypher MATCH queries and graph traversal relationships.
+
+References:
+- https://neo4j.com/docs/cypher-manual/current/clauses/match/
+- https://neo4j.com/developer/graph-database/
+
+## Menu Option 5 - Add Attendee Connection
+
+Used Neo4j MERGE statements to create nodes and relationships while preventing duplicates.
+
+References:
+- https://neo4j.com/docs/cypher-manual/current/clauses/merge/
+- https://neo4j.com/docs/python-manual/current/query-simple/
+
+## Menu Option 6 - View Rooms
+
+Used cached room data stored in Python variables to prevent unnecessary database reads.
+
+References:
+- https://docs.python.org/3/tutorial/datastructures.html
+- https://realpython.com/python-variables/
+
+## Menu Option 7 - Conference Summary
+
+Used aggregate SQL functions and Neo4j relationship counting.
+
+References:
+- https://www.w3schools.com/sql/sql_count_avg_sum.asp
+- https://neo4j.com/docs/cypher-manual/current/functions/aggregating/
+
+## Menu Option 8 - Recommend Connections
+
+Used recommendation logic based on shared conference sessions and filtering existing Neo4j relationships.
+
+References:
+- https://neo4j.com/developer/graph-data-science/recommendations/
+- https://www.w3schools.com/sql/sql_distinct.asp
