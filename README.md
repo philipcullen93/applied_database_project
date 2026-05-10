@@ -64,17 +64,25 @@ Conference Management
 Main Menu
 
 1 - View Speakers and Sessions
+
 2 - View Attendees by Company
+
 3 - Add New Attendees
+
 4 - View Connected Attendees
+
 5 - Add Attendee Connection
+
 6 - View Rooms
+
 7 - View Conference Summary
+
 8 - Recommend Connections
+
 x - Exit Application
 
-### New Features
-## Conference Summary Dashboard
+## New Features
+### Conference Summary Dashboard
 Displays a summary of statistics from MySQL and Neo4j, these include:
 - Total Attendees
 - Total Companies
