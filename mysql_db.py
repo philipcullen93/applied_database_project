@@ -195,3 +195,27 @@ def get_conference_summary():
     conn.close()
 
     return summary
+
+# Retrieve attendees who attended the same sessions
+def get_shared_session_attendees(attendee_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    query = """
+        SELECT DISTINCT
+            attendee.attendeeID,
+            attendee.attendeeName
+        FROM registration r1
+        JOIN registration r2
+            ON r1.sessionID = r2.sessionID
+        JOIN attendee
+            ON r2.attendeeID = attendee.attendeeID
+        WHERE r1.attendeeID = %s
+        AND r2.attendeeID != %s;
+    """
+
+    cursor.execute(query, (attendee_id, attendee_id))
+    results = cursor.fetchall()
+
+    conn.close()
+    return results

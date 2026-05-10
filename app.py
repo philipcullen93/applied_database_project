@@ -32,7 +32,8 @@ from mysql_db import (
     add_attendee,
     get_attendee_name,
     get_rooms,
-    get_conference_summary
+    get_conference_summary,
+    get_shared_session_attendees
 )
 
 # Cache room data so newly added rooms are not shown
@@ -267,6 +268,7 @@ def main_menu():
         print("5 - Add Attendee Connection")
         print("6 - View Rooms")
         print("7 - View Conference Summary")
+        print("8 - Recommend Connections")
         print("x - Exit Application")
 
         # Get user menu choice
@@ -294,6 +296,9 @@ def main_menu():
         elif choice == "7":
             view_conference_summary()
 
+        elif choice == "8":
+            recommend_connections()
+
         elif choice == "x":
             print("\nExiting application...")
             break
@@ -315,6 +320,43 @@ def view_conference_summary():
     print(f"Total Sessions: {summary['sessions']}")
     print(f"Total Rooms: {summary['rooms']}")
     print(f"Total Neo4j Connections: {total_connections}")
+
+# Recommend attendees based on shared sessions
+def recommend_connections():
+
+    attendee_id = input("\nEnter Attendee ID: ")
+
+    if not attendee_id.isdigit():
+        print("***ERROR*** Invalid Attendee ID")
+        return
+
+    attendee = get_attendee_name(attendee_id)
+
+    if attendee is None:
+        print("***ERROR*** Attendee does not exist")
+        return
+
+    recommendations = get_shared_session_attendees(attendee_id)
+
+    filtered_recommendations = []
+
+    # Remove attendees already connected in Neo4j
+    for recommended_id, recommended_name in recommendations:
+
+        if not connection_exists(attendee_id, recommended_id):
+            filtered_recommendations.append(
+                (recommended_id, recommended_name)
+            )
+
+    if len(filtered_recommendations) == 0:
+        print("\nNo recommendations available")
+        return
+
+    print("\nRecommended Connections")
+    print("-" * 40)
+
+    for recommended_id, recommended_name in filtered_recommendations:
+        print(f"{recommended_id} | {recommended_name}")
 
 # Main application entry point
 def main():
