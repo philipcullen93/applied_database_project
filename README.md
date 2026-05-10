@@ -81,11 +81,19 @@ Main Menu
 
 x - Exit Application
 
-## New Features
-### Conference Summary Dashboard
+## New Features/Innovations
+### Conference Summary
 Displays a summary of statistics from MySQL and Neo4j, these include:
 - Total Attendees
 - Total Companies
 - Total Sessions
 - Total Rooms
 - Total Neo4j Connections
+
+### Recommend Connections
+Recommends possible attendee connections based on shared session attendance while excluding attendees already connected in the Neo4j graph.
+
+This combines several pieces of data:
+1. MySQL session registration data
+2. Neo4j relationship data
+3. Python filtering logic
