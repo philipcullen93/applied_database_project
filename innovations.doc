@@ -1,0 +1,59 @@
+Applied Databases Project
+Innovation Features
+
+Student: Philip Cullen
+
+This project includes two innovation features beyond the core assignment requirements.
+
+1. Conference Summary [Ref 1 - 4]
+
+A new menu option was added which displays summary statistics for the conference system.
+
+The dashboard combines information from both MySQL and Neo4j databases, including:
+
+- Total attendees
+- Total companies
+- Total sessions
+- Total rooms
+- Total attendee connections stored in Neo4j
+
+This innovation demonstrates:
+- Aggregate SQL queries
+- Neo4j relationship counting
+- Cross-database integration
+- Data reporting functionality
+
+2. Recommend Connections System [Ref 5 - 8]
+
+A recommendation system was added to suggest possible attendee connections.
+
+The feature works by:
+- Identifying attendees who attended the same sessions
+- Filtering out attendees already connected in Neo4j
+- Excluding the selected attendee from recommendations
+
+This combines:
+- MySQL session registration data
+- Neo4j graph relationships
+- Python filtering logic
+
+The recommendation system demonstrates:
+- Recommendation-style analytics
+- Graph-aware filtering
+- Multi-database application design
+
+References
+
+Conference Summary
+
+1. https://www.w3schools.com/sql/sql_count_avg_sum.asp
+2. https://neo4j.com/docs/cypher-manual/current/functions/aggregating/
+3. https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html
+4. https://neo4j.com/docs/cypher-manual/current/functions/
+
+Recommend Connections
+
+5. https://neo4j.com/developer/graph-data-science/recommendations/
+6. https://www.w3schools.com/sql/sql_distinct.asp
+7. https://neo4j.com/developer-blog/recommendation-engine-hands-on-1/
+8. https://www.w3schools.com/sql/sql_groupby.asp
