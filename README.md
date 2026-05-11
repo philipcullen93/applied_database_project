@@ -26,13 +26,13 @@ The application allows users to:
 ## Required Databases
 
 ### MySQL
-Import appdbproj.sql into MySQL.
+Import [appdbproj.sql] into MySQL.
 
 This creates the database:
 appdbproj
 
 ### Neo4j
-Create a Neo4j instance and run the provided Neo4j setup script, appdbprojNeo4j.json.
+Create a Neo4j instance and run the provided Neo4j setup script, [appdbprojNeo4j.json].
 
 The graph contains Attendee nodes and CONNECTED_TO relationships.
 
@@ -46,13 +46,13 @@ The graph contains Attendee nodes and CONNECTED_TO relationships.
    pip install mysql-connector-python neo4j
 
 ## Running the Application
-1. Ensure MySQL is running.
+1. Ensure MySQL is running, and that the database appdbproj has been imported.
 
    - Note: If MySQL Server is not connected navigate to Services -> MySQL80 and Start the Service
 
-3. Ensure Neo4j is running.
+2. Ensure Neo4j is running, and that the appdbprojNeo4j.json attendee graph has been loaded.
 
-4. Enter python app.py in the terminal
+3. Enter: python app.py, in the terminal
 
    - Note: The application will confirm that both the MySQL and Neo4j databases are connected.
 
@@ -166,6 +166,8 @@ Used aggregate SQL functions and Neo4j relationship counting.
 References:
 - https://www.w3schools.com/sql/sql_count_avg_sum.asp
 - https://neo4j.com/docs/cypher-manual/current/functions/aggregating/
+- https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html
+- https://neo4j.com/docs/cypher-manual/current/functions/
 
 ## Menu Option 8 - Recommend Connections
 
@@ -174,3 +176,5 @@ Used recommendation logic based on shared conference sessions and filtering exis
 References:
 - https://neo4j.com/developer/graph-data-science/recommendations/
 - https://www.w3schools.com/sql/sql_distinct.asp
+- https://neo4j.com/developer-blog/recommendation-engine-hands-on-1/
+- https://www.w3schools.com/sql/sql_groupby.asp
