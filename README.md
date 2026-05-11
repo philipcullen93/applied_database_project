@@ -26,13 +26,13 @@ The application allows users to:
 ## Required Databases
 
 ### MySQL
-Import [appdbproj.sql] into MySQL.
+Import [appdbproj.sql](https://vlegalwaymayo.atu.ie/pluginfile.php/1889805/mod_resource/content/1/appdbproj.sql) into MySQL.
 
 This creates the database:
 appdbproj
 
 ### Neo4j
-Create a Neo4j instance and run the provided Neo4j setup script, [appdbprojNeo4j.json].
+Create a Neo4j instance and run the provided Neo4j setup script, [[appdbprojNeo4j.json]](https://vlegalwaymayo.atu.ie/pluginfile.php/1889807/mod_resource/content/1/appdbprojNeo4j.json).
 
 The graph contains Attendee nodes and CONNECTED_TO relationships.
 
