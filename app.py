@@ -1,5 +1,7 @@
 # Applied Databases Project
+
 # Author: Philip Cullen
+
 # Conference Management Application
 #
 # Technologies Used:
